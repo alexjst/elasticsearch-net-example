@@ -8,6 +8,7 @@ namespace NuSearch.Domain.Model
 	public class Package
 	{
 		private static readonly DateTime SpecialUnlistedDate = new DateTime(1901, 01, 01);
+		public CompletionField Suggest { get; set; }
 
 		public Package() { }
 
@@ -27,6 +28,12 @@ namespace NuSearch.Domain.Model
 			this.Authors = latestVersion.Authors.Split('|').Select(author => new PackageAuthor { Name = author }).ToList();
 			this.Versions = feeds.Select(f => new PackageVersion(f)).ToList();
 			this.AllVersionsUnlisted = feeds.All(f => f.Published < SpecialUnlistedDate);
+
+			this.Suggest = new CompletionField
+			{
+				Input = new List<string>(latestVersion.Id.Split('.')) { latestVersion.Id },
+				Weight = latestVersion.DownloadCount
+			};
 		}
 		public bool AllVersionsUnlisted { get; set;  }
 

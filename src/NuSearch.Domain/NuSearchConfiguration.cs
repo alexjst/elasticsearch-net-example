@@ -13,7 +13,15 @@ namespace NuSearch.Domain
 
 		static NuSearchConfiguration()
 		{
-			_connectionSettings = new ConnectionSettings(CreateUri(9200)).DefaultIndex("nusearch");
+			/* for FeedPackage
+			_connectionSettings = new ConnectionSettings(CreateUri(9200))
+                .DefaultIndex("nusearch")
+                .DefaultMappingFor<FeedPackage>(i => i.IndexName("nusearch"));
+				*/
+
+			_connectionSettings = new ConnectionSettings(CreateUri(9200))
+                .DefaultMappingFor<Package>(i => i.IndexName("nusearch"))
+                .PrettyJson();
 		}
 
 		private static readonly ConnectionSettings _connectionSettings;

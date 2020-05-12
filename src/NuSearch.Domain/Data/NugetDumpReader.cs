@@ -42,22 +42,22 @@ namespace NuSearch.Domain.Data
 			}
 		}
 			
-		// public IEnumerable<Package> GetPackages()
-		// {
-		// 	var currentId = string.Empty;
-		// 	var versions = new List<FeedPackage>();
-		// 	foreach (var packageVersion in this.Packages)
-		// 	{
-		// 		if (packageVersion.Id != currentId && currentId != string.Empty)
-		// 		{
-		// 			yield return new Package(versions);
-		// 			versions = new List<FeedPackage>();
+		public IEnumerable<Package> GetPackages()
+		{
+            var currentId = string.Empty;
+			var versions = new List<FeedPackage>();
+		 	foreach (var packageVersion in this.Packages)
+		 	{
+		 		if (packageVersion.Id != currentId && currentId != string.Empty)
+		 		{
+		 			yield return new Package(versions);
+		 			versions = new List<FeedPackage>();
 
-		// 		}
-		// 		currentId = packageVersion.Id;
-		// 		versions.Add(packageVersion);
+		 		}
+		 		currentId = packageVersion.Id;
+		 		versions.Add(packageVersion);
 
-		// 	}
-		// }
+			}
+		}
 	}
 }
