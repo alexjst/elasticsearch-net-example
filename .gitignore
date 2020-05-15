@@ -19,6 +19,7 @@
 *.cache
 *.ilk
 *.log
+*.swp
 *.nupkg
 *.ncrunchsolution
 [Bb]in
