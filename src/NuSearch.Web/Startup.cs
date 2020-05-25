@@ -31,7 +31,6 @@ namespace NuSearch.Web
 			
 			// register the client as a singleton
 			services.AddSingleton<IElasticClient>(NuSearchConfiguration.GetClient());
-			services.AddCors();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -57,11 +56,6 @@ namespace NuSearch.Web
 				endpoints.MapControllers();
 				endpoints.MapControllerRoute("default", "{controller=Search}/{action=Index}");
 			});
-
-			app.UseCors(builder =>
-				builder.AllowAnyOrigin()
-					.AllowAnyMethod()
-					.AllowAnyHeader());
 		}
     }
 }
